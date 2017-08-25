@@ -137,11 +137,9 @@ var getPercent = function(n, d) {
 };
 
 var main = function() {
-  console.log("hi");
     var queries = getQueryParams();
     var rapidView = queries.rapidView;
     var view = queries.view;
-    console.log(queries);
 
     if (rapidView) {
         if (rapidView == "16") {
