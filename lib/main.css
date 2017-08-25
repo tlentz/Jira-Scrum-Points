@@ -1,0 +1,13 @@
+.jsp-percent {
+  display: none;
+}
+
+h2 > .aui-badge:hover .jsp-percent {
+  display: block;
+  cursor: none;
+}
+
+h2 > .aui-badge:hover .jsp-count {
+  display: none;
+  cursor: none;
+}
