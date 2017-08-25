@@ -20,7 +20,6 @@ var totalPlanning = function() {
         }
     }
     if ($("#totalPointsBadge").html() == null) {
-      console.log("NULLLLLLLLLLLLLLLLLLL");
         var totalPointsBadge = "<span id=\"totalPointsBadge\" class=\"aui-badge  ghx-not-started\" title=\"Sprint Total (Story Points)\" style=\"background-color:#EE7600;\">" + totalPoints + "</span>";
         $(totalBadgesDiv).append(totalPointsBadge);
     } else {
@@ -40,7 +39,6 @@ var totalPlanning = function() {
         });
     }
     if ($("#backlogTotalPointsBadge").html() == null) {
-      console.log("NULLLLLLLLLLLLLLLLLLL");
         var backlogTotalPointsBadge = "<span id=\"backlogTotalPointsBadge\" class=\"aui-badge ghx-statistic-badge\" title=\"Backlog Total (Story Points)\">" + totalBacklogPoints + "</span>";
         $(totalBadgesDiv).append(backlogTotalPointsBadge);
     } else {
