@@ -134,11 +134,21 @@ var getPercent = function(n, d) {
     return ((n / d) * 100).toFixed(0) + "%";
 };
 
+var clifford = function() {
+    var cliffico = chrome.extension.getURL("lib/img/cliffico.png");
+    $('img').each(function () {
+    var curSrc = $(this).attr('src');
+    if ( curSrc === 'https://avatar-cdn.atlassian.com/a749522c79c699ed05cde9fe4270ca60?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fa749522c79c699ed05cde9fe4270ca60%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue' ) {
+       $(this).attr('src', cliffico);
+    }
+});
+}
+
 var main = function() {
     var queries = getQueryParams();
     var rapidView = queries.rapidView;
     var view = queries.view;
-
+    clifford();
     if (rapidView) {
         if (rapidView == "16") {
             if (view == "planning" || view == "planning.nodetail") {

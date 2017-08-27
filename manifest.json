@@ -9,5 +9,6 @@
         "js": [ "lib/jquery-3.2.1.min.js", "content.js" ],
         "css": [ "lib/main.css" ],
         "matches": [ "https://*.atlassian.net/secure/RapidBoard.jspa?*", "http://*.atlassian.net/secure/RapidBoard.jspa?*" ]
-    } ]
+    } ],
+    "web_accessible_resources": ["lib/img/cliffico.png"]
 }
