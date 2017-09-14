@@ -44,6 +44,27 @@ var totalPlanning = function() {
     } else {
         $("#backlogTotalPointsBadge").html(totalBacklogPoints);
     }
+
+    var highlightedPoints = 0;
+    for(var i = 0; i < 2; i++) {
+        var issueDiv = $("div.js-issue-list.ghx-issues.ghx-has-issues")[i];
+        if (issueDiv !== undefined) {
+            var highlightedIssues = $(issueDiv).find("div.ghx-selected span.aui-badge.ghx-statistic-badge");
+            $(highlightedIssues).each(function() {
+                var highlightPointValueText = $(this).html();
+                var highlightPointValueNum = parseFloat(highlightPointValueText);
+                if (!isNaN(highlightPointValueNum)) {
+                    highlightedPoints += highlightPointValueNum;
+                }
+            });
+        }
+    }
+    if ($("#highlightedTotalPointsBadge").html() == null) {
+        var highlightedTotalPointsBadge = "<span id=\"highlightedTotalPointsBadge\" class=\"aui-badge ghx-statistic-badge\"" + highlightedPoints + "</span>";
+        $("div.aui-sidebar-footer").prepend(highlightedTotalPointsBadge);
+    } else {
+        $("#highlightedTotalPointsBadge").html(highlightedPoints);
+    }
 };
 
 var totalDetail = function() {
