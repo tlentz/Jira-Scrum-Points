@@ -11,3 +11,8 @@ h2 > .aui-badge:hover .jsp-count {
   display: none;
   cursor: none;
 }
+
+#highlightedTotalPointsBadge {
+  background-color: #c0d6ec;
+  margin-left: 25%;
+}
