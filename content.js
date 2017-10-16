@@ -134,6 +134,10 @@ var getPercent = function(n, d) {
     return ((n / d) * 100).toFixed(0) + "%";
 };
 
+var getAverage = function(n,d) {
+    return (n / d).toFixed(0);
+}
+
 var clifford = function() {
     var cliffico = chrome.extension.getURL("lib/img/cliffico.png");
     $('img').each(function () {
@@ -145,14 +149,67 @@ var clifford = function() {
 };
 
 var velocity = function () {
-    var chartData = $("#ghx-chart-data > table > tbody");
-    var committed = chartData.find('.ghx-left');
-    // console.log(committed);
-    // var totalCommitted = 0;
-    // $(committed).each(function() {
-    //     console.log($(this).html());
-    // });
-    // var completed = $(chartData).find('.ghx-right')
+    var totalSprints = 0;
+    var totalCommittmentPts = 0;
+    var totalCompletedPts = 0;
+    var chartData = $("#ghx-chart-data");
+    var numTables = $(chartData).find('table').length;
+    var sprintTable = undefined;
+    if(numTables == 1) {
+        sprintTable = $(chartData).first("table");
+    } else {
+        sprintTable = $(chartData).find("table").children()[1];
+    }
+    var thead = $(sprintTable).find("thead");
+    var newThead = "<tr>"
+                 + "<th>Sprint</th>"
+                 + "<th class=\"ghx-right\">Commitment</th>"
+                 + "<th class=\"ghx-right\">Completed Pts</th>"
+                 + "<th class=\"ghx-right\">Completed %</th>"
+                 + "</tr>"
+    $(thead).html(newThead);
+
+    var rows = $(sprintTable).find("tbody > tr");
+    totalSprints = rows.length;
+    $(rows).each(function() {
+        if($(this).children('td').length < 4) {
+            var commitmentPts = parseFloat($(this).find('td:eq(1)').html());
+            var completedPts = parseFloat($(this).find('td:eq(2)').html());
+            var completedPercent = "";
+            if(!isNaN(commitmentPts) && !isNaN(completedPts)) {
+                totalCommittmentPts += commitmentPts;
+                totalCompletedPts += completedPts;
+                completedPercent = getPercent(completedPts, commitmentPts);
+            }
+            percentTd = "<td class=\"ghx-right\">" + completedPercent + "</td>";
+            $(this).append(percentTd);
+        }
+    });
+
+    if(numTables < 2) {
+        var averageCommitmentPts = getAverage(totalCommittmentPts, totalSprints);
+        var averageCompletedPts = getAverage(totalCompletedPts, totalSprints);
+        var averageCompletedPercent = getPercent(totalCompletedPts, totalCommittmentPts);
+        var newTable = "<table class=\"aui ghx-auto\" id=\"sprint-stats\">"
+                     + "<thead>"
+                     + "<tr>"
+                     + "<th></th>"
+                     + "<th class=\"ghx-right\">Commitment</th>"
+                     + "<th class=\"ghx-right\">Completed Pts</th>"
+                     + "<th class=\"ghx-right\">Completed %</th>"
+                     + "</tr>"
+                     + "</thead>"
+                     + "<tbody>"
+                     + "<tr>"
+                     + "<td>Average</td>"
+                     + "<td class=\"ghx-right\">" + averageCommitmentPts + "</td>"
+                     + "<td class=\"ghx-right\">" + averageCompletedPts + "</td>"
+                     + "<td class=\"ghx-right\">" + averageCompletedPercent + "</td>"
+                     + "</tr>"
+                     + "</tbody>"
+                     + "</table>";
+        $(chartData).prepend(newTable);
+    }
 };
 
 var main = function() {
