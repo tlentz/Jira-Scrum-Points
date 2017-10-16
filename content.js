@@ -137,23 +137,37 @@ var getPercent = function(n, d) {
 var clifford = function() {
     var cliffico = chrome.extension.getURL("lib/img/cliffico.png");
     $('img').each(function () {
-    var curSrc = $(this).attr('src');
-    if ( curSrc === 'https://avatar-cdn.atlassian.com/a749522c79c699ed05cde9fe4270ca60?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fa749522c79c699ed05cde9fe4270ca60%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue' ) {
-       $(this).attr('src', cliffico);
-    }
-});
-}
+        var curSrc = $(this).attr('src');
+        if ( curSrc === 'https://avatar-cdn.atlassian.com/a749522c79c699ed05cde9fe4270ca60?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fa749522c79c699ed05cde9fe4270ca60%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue' ) {
+            $(this).attr('src', cliffico);
+        }
+    });
+};
+
+var velocity = function () {
+    var chartData = $("#ghx-chart-data > table > tbody");
+    var committed = chartData.find('.ghx-left');
+    // console.log(committed);
+    // var totalCommitted = 0;
+    // $(committed).each(function() {
+    //     console.log($(this).html());
+    // });
+    // var completed = $(chartData).find('.ghx-right')
+};
 
 var main = function() {
     var queries = getQueryParams();
     var rapidView = queries.rapidView;
     var view = queries.view;
+    var chart = queries.chart;
     clifford();
     if (rapidView) {
         if (rapidView == "16") {
             if (view == "planning" || view == "planning.nodetail") {
                 totalPlanning();
-            } else {
+            } else if (view == "reporting" && chart == "velocityChart") {
+                velocity();
+            }else {
                 totalDetail();
             }
         }
