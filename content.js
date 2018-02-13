@@ -44,24 +44,29 @@ var totalPlanning = function() {
     } else {
         $("#backlogTotalPointsBadge").html(totalBacklogPoints);
     }
+};
 
+var totalHighlightedPoints = function() {
     var highlightedPoints = 0;
-    for(var i = 0; i < 2; i++) {
-        var issueDiv = $("div.js-issue-list.ghx-issues.ghx-has-issues")[i];
-        if (issueDiv !== undefined) {
-            var highlightedIssues = $(issueDiv).find("div.ghx-selected span.aui-badge.ghx-statistic-badge");
-            $(highlightedIssues).each(function() {
-                var highlightPointValueText = $(this).html();
-                var highlightPointValueNum = parseFloat(highlightPointValueText);
-                if (!isNaN(highlightPointValueNum)) {
-                    highlightedPoints += highlightPointValueNum;
-                }
-            });
+    var highlightedIssuesBacklog = $("div.ghx-selected span.aui-badge.ghx-statistic-badge");
+    $(highlightedIssuesBacklog).each(function() {
+        var highlightPointValueText = $(this).html();
+        var highlightPointValueNum = parseFloat(highlightPointValueText);
+        if (!isNaN(highlightPointValueNum)) {
+            highlightedPoints += highlightPointValueNum;
         }
-    }
+    });
+    var highlightedIssuesSprint = $("div.ghx-selected aui-badge.ghx-estimate");
+    $(highlightedIssuesSprint).each(function() {
+        var highlightPointValueText = $(this).html();
+        var highlightPointValueNum = parseFloat(highlightPointValueText);
+        if (!isNaN(highlightPointValueNum)) {
+            highlightedPoints += highlightPointValueNum;
+        }
+    });
     if ($("#highlightedTotalPointsBadge").html() == null) {
         var highlightedTotalPointsBadge = "<span id=\"highlightedTotalPointsBadge\" class=\"aui-badge ghx-statistic-badge\"" + highlightedPoints + "</span>";
-        $("div.aui-sidebar-footer").prepend(highlightedTotalPointsBadge);
+        $("div.dEthyU").first().prepend(highlightedTotalPointsBadge);
     } else {
         $("#highlightedTotalPointsBadge").html(highlightedPoints);
     }
@@ -241,11 +246,12 @@ var main = function() {
     clifford();
     if (rapidView) {
         if (rapidView == "16") {
+            totalHighlightedPoints();
             if (view == "planning" || view == "planning.nodetail") {
                 totalPlanning();
             } else if (view == "reporting" && chart == "velocityChart") {
                 velocity();
-            }else {
+            } else {
                 totalDetail();
             }
         }
