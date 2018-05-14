@@ -66,7 +66,7 @@ var totalHighlightedPoints = function() {
     });
     if ($("#highlightedTotalPointsBadge").html() == null) {
         var highlightedTotalPointsBadge = "<span id=\"highlightedTotalPointsBadge\" class=\"aui-badge ghx-statistic-badge\"" + highlightedPoints + "</span>";
-        $("div.jacXJa").first().prepend(highlightedTotalPointsBadge);
+        $("div#navigation-app").first().prepend(highlightedTotalPointsBadge);
     } else {
         $("#highlightedTotalPointsBadge").html(highlightedPoints);
     }
