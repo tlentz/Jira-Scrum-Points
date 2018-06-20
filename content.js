@@ -168,8 +168,20 @@ var clifford = function() {
     var cliffico = chrome.extension.getURL("lib/img/cliffico.png");
     $('img').each(function () {
         var curSrc = $(this).attr('src');
-        if ( curSrc === 'https://avatar-cdn.atlassian.com/a749522c79c699ed05cde9fe4270ca60?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fa749522c79c699ed05cde9fe4270ca60%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue' ) {
+        if ( curSrc.includes('https://avatar-cdn.atlassian.com/a749522c79c699ed05cde9fe4270ca60') ) {
             $(this).attr('src', cliffico);
+        }
+    });
+};
+
+var tacoBell = function() {
+    console.log("tbell");
+    var tbell = chrome.extension.getURL("lib/img/tbell.png");
+    console.log(tbell);
+    $('img').each(function () {
+        var curSrc = $(this).attr('src');
+        if ( curSrc.includes('https://avatar-cdn.atlassian.com/ef24f762dffb21ac20b9a67ef45815f9') ) {
+            $(this).attr('src', tbell);
         }
     });
 };
@@ -244,6 +256,7 @@ var main = function() {
     var view = queries.view;
     var chart = queries.chart;
     clifford();
+    tacoBell();
     if (rapidView) {
         if (rapidView == "16") {
             totalHighlightedPoints();
