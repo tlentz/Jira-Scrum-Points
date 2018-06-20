@@ -10,7 +10,7 @@
         "css": [ "lib/main.css" ],
         "matches": [ "https://*.atlassian.net/secure/RapidBoard.jspa?*", "http://*.atlassian.net/secure/RapidBoard.jspa?*" ]
     } ],
-    "web_accessible_resources": ["lib/img/cliffico.png"],
+    "web_accessible_resources": ["lib/img/cliffico.png", "lib/img/tbell.png"],
     "icons": { 
         "16": "lib/img/clifford16.png",
         "48": "lib/img/clifford48.png",
