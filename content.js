@@ -168,7 +168,7 @@ var clifford = function() {
     var cliffico = chrome.extension.getURL("lib/img/cliffico.png");
     $('img').each(function () {
         var curSrc = $(this).attr('src');
-        if ( curSrc.includes('https://avatar-cdn.atlassian.com/a749522c79c699ed05cde9fe4270ca60') ) {
+        if ( curSrc.includes('557058:62f5f717-19b9-46ac-8b8d-984d10341773/3848d706-4b60-48f3-81d2-2c76b7beb423/128') ) {
             $(this).attr('src', cliffico);
         }
     });
